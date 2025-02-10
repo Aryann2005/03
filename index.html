@@ -24,6 +24,33 @@
             position: relative;
         }
 
+        /* Valentine's Heading */
+        .valentine-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: gold;
+            text-shadow: 3px 3px 5px red;
+            position: absolute;
+            top: 35%;
+            width: 100%;
+            text-align: center;
+            font-family: 'Calibre', sans-serif;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        .valentine-text span {
+            display: block;
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Open Button */
         button {
             font-size: 18px;
             padding: 12px 20px;
@@ -40,33 +67,6 @@
 
         .hidden {
             display: none;
-        }
-
-        /* Valentine Heading */
-        .valentine-text {
-            font-size: 28px;
-            font-weight: bold;
-            color: gold;
-            text-shadow: 3px 3px 5px red;
-            position: absolute;
-            top: 35%;
-            width: 100%;
-            text-align: center;
-            font-family: 'Calibre', sans-serif;
-            opacity: 0;
-            animation: bounceIn 1s ease-in-out forwards;
-        }
-
-        .valentine-text span {
-            display: block;
-            font-size: 22px;
-            margin-top: 5px;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
         }
 
         /* Envelope */
@@ -86,11 +86,10 @@
         /* Letter */
         .letter {
             width: 260px;
-            height: 0;
+            height: 400px;
             background: #f7e5b9;
             position: absolute;
             top: 0;
-            transition: height 3s ease-in-out;
             overflow-y: auto;
             border-radius: 5px;
             padding: 15px;
@@ -101,7 +100,6 @@
             font-weight: bold;
             text-transform: uppercase;
             color: #ff69b4;
-            max-height: 400px;
         }
 
         .letter.open {
@@ -137,11 +135,12 @@
 </head>
 <body>
     <div class="container">
-        <button id="openBtn">Open 💌</button>
         <div class="valentine-text hidden" id="valentineText">
-            HAPPY VALENTINE'S DAY  
-            <span>MY LOVIEE CUTIE PARTNER</span>
+            HAPPY VALENTINE'S 🌹 DAY  
+            <span>MY LOVIEE CUTIE CUTIE PARTNER</span>
         </div>
+
+        <button id="openBtn">Open 💌</button>
 
         <div class="envelope hidden" id="envelope">
             <div class="letter" id="letter">
@@ -156,28 +155,17 @@
         <source src="valentine_song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Music Icon -->
-    <div class="music" onclick="toggleMusic()">🎵</div>
-
     <script>
         let music = document.getElementById("bgMusic");
-
-        function toggleMusic() {
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
-        }
 
         document.getElementById("openBtn").addEventListener("click", function() {
             this.style.display = "none"; 
 
-            // Start Music
+            // Start Music Automatically
             music.volume = 0.8; 
             music.play();
 
-            // Show Heading
+            // Show Valentine's Text
             let valentineText = document.getElementById("valentineText");
             valentineText.classList.remove("hidden");
 
@@ -192,15 +180,15 @@
                 setTimeout(() => {
                     letter.classList.add("open");
 
-                    let message = `AYUSHI," ❤️
+                    let message = `AYUSHI ❤️
 
 PATA HAI, DUNIYA KITNI BHI BADAL JAAYE, MERE LIYE EK CHEEZ HAMESHA SAME RAHEGI—TU. TERI WOH HASI JO DIN BANA DETI HAI, TERA GUSSA JO MUJHE AUR BHI SPECIAL FEEL KARWATA HAI, AUR TERA WOH BINA WAJAH OVERTHINK KARNA JO MUJHE HAMESHA TERE AUR KAREEB LE AATA HAI. 😄❤️
 
-MAIN JAANTA HOON, KABHI TERE MANN MEIN AJEEB AJEEB SAWAAL AATE HAIN, KABHI MOOD SWINGS HOTI HAIN, PAR EK CHEEZ PAKKI HAI—MAIN YAHIN HOON, HAMESHA. HAATH PAKDA HAI TOH KABHI CHHODUNGA NAHI. 💞I wish ki yeh grip dono taraf se strong rahe 🤞✨ 💞
+MAIN JAANTA HOON, KABHI TERE MANN MEIN AJEEB AJEEB SAWAAL AATE HAIN, KABHI MOOD SWINGS HOTI HAIN, PAR EK CHEEZ PAKKI HAI—MAIN YAHIN HOON, HAMESHA. HAATH PAKDA HAI TOH KABHI CHHODUNGA NAHI.I wish ki yeh grip dono taraf se strong rahe 🤞✨, kyunki rishte ek doosre ke saath se hi chalte hain, sirf ek ke efforts se nahi. 💞
 
 Tere bina bhi life chalti rahegi, par tere saath chalne ka jo sukoon hai, wo kahin aur nahi milega. Tu mere liye bas ek naam ya ehsaas nahi, meri zindagi ka sabse khoobsurat hissa hai. 💖
 
-Happy Valentine’s Day, meri overthinking queen! 💘 Tu bas aise hi meri duniya ka best part bani reh. 😘`;
+Happy Valentine’s Day, meri overthinking queen! 💘 Tu bas aise hi meri duniya ka best part bani reh. 😘 💞`;
 
                     let j = 0;
                     let speed = 50;
@@ -209,7 +197,7 @@ Happy Valentine’s Day, meri overthinking queen! 💘 Tu bas aise hi meri duniy
                     function typeWriter() {
                         if (j < message.length) {
                             letterText.innerHTML += message.charAt(j);
-                            letterText.scrollTop = letterText.scrollHeight; // Auto-scroll
+                            letterText.scrollTop = letterText.scrollHeight;
                             j++;
                             setTimeout(typeWriter, speed);
                         } else {
